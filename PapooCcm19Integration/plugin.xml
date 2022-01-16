@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.5/engine/Shopware/Components/Plugin/schema/plugin.xsd">
+	<label lang="de">CCM19-Integration</label>
+	<label lang="en">CCM19 Integration</label>
+
+	<version>1.1.0</version>
+	<copyright>(c) Papoo Software &amp; Media GmbH</copyright>
+	<license>proprietary</license>
+	<link>https://www.papoo-media.de</link>
+	<author>Papoo Software &amp; Media GmbH</author>
+	<compatibility minVersion="5.2.0"/>
+
+	<changelog version="1.1.0">
+		<changes lang="de"><![CDATA[Unterstützung für Plugins, die den Shopware Cookie Manager nutzen.]]></changes>
+		<changes lang="en"><![CDATA[Support for plugins that use the Shopware Cookie Manager.]]></changes>
+	</changelog>
+
+	<changelog version="1.0.4">
+		<changes lang="de"><![CDATA[Kompatibilität mit geänderten Javascript-URLs.]]></changes>
+		<changes lang="en"><![CDATA[Compatibility with modified javascript urls.]]></changes>
+	</changelog>
+
+	<changelog version="1.0.3">
+		<changes lang="de"><![CDATA[
+- Einhängepunkt im HTML-Header verschoben, um Kompatibilität mit u.a. Google Tag Manager zu verbessern.
+- Kompatibilität mit Shopware 5.7.0.
+]]></changes>
+		<changes lang="en"><![CDATA[
+- Moved insertion point in HTML header to improve compatibility e.g. with Google Tag Manager.
+- Compatibility with Shopware 5.7.0.
+]]></changes>
+	</changelog>
+
+	<changelog version="1.0.2">
+		<changes lang="de"><![CDATA[Bug behoben, durch den u.U. der Integrationscode nicht erkannt wird.]]></changes>
+		<changes lang="en"><![CDATA[Resolved bug, which caused some integration codes to not be accepted.]]></changes>
+	</changelog>
+
+	<changelog version="1.0.1">
+		<changes lang="de"><![CDATA[
+- Kompatibilität mit Subshops verbessert
+- Beschreibungstexte der Plugin-Konfiguration überarbeitet
+- Fehlertoleranz bei Code-Snippet-Eingabe verbessert
+]]></changes>
+		<changes lang="en"><![CDATA[
+- Enhanced subshop compatibility
+- Revised plugin configuration labels and descriptions
+- Improved error tolerance on code snippet input
+]]></changes>
+	</changelog>
+
+	<changelog version="1.0.0">
+		<changes lang="de">Erstveröffentlichung</changes>
+		<changes lang="en">First release</changes>
+	</changelog>
+
+	<description><![CDATA[
+		<p>This plugin integrates the CCM19 Cookie Consent Manager and allows to disable the automatic tracking JS of the Google Services (SwagGoogle) plugin.</p>
+		<p>Login to CCM19 and copy the code snippet into the configuration of this plugin to activate it.</p>
+		<p>To enable Google Analytics tracking when consent is given add a cookie <strong>_ga</strong> to CCM19 and set the code to <code>&lt;script src="/custom/plugins/SwagGoogle/Resources/frontend/js/jquery.google_analytics_plugin.js"&gt;&lt;/script&gt;</code>.</p>
+	]]></description>
+	<description lang="de"><![CDATA[
+		<p>Dieses Plugin integriert den CCM19 Cookie Consent Manager und ermöglicht das automatische Tracking-JS des „Google Services“-Plugins (SwagGoogle) zu deaktiveren.</p>
+		<p>Melden Sie sich beim CCM19 an und kopieren Sie ihr Code-Snippet in die Konfiguration dieses Plugins, um es zu aktivieren.</p>
+		<p>Um das Google Analytics Tracking bei Zustimmung zu aktivieren, fügen Sie ein Cookie <strong>_ga</strong> zu CCM19 hinzu und setzen Sie den Code auf <code>&lt;script src="/custom/plugins/SwagGoogle/Resources/frontend/js/jquery.google_analytics_plugin.js"&gt;&lt;/script&gt;</code>.</p>
+	]]></description>
+
+</plugin>

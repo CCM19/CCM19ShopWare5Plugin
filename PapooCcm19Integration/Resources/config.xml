@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.3/engine/Shopware/Components/Plugin/schema/config.xsd">
+	<elements>
+		<element required="false" type="textarea" scope="shop">
+			<name>integrationCode</name>
+			<label lang="de">CCM19-Code-Snippet</label>
+			<label lang="en">CCM19 code snippet</label>
+			<value></value>
+			<description lang="de">Fügen Sie hier das Code-Snippet aus CCM19 ein. Achten Sie darauf, dass mindestens die vollständige URL fehlerfrei übertragen wurde. Dies muss für alle Subshops und Locales durchgeführt werden.</description>
+			<description lang="en">Enter the code snippet from CCM19 here. Make sure that the at least the whole URL is copied without typing errors. You need to repeat this for every subshop and locale.</description>
+		</element>
+
+		<element type="boolean" scope="shop">
+			<name>blockGA</name>
+			<label lang="de">Google Analytics blockieren</label>
+			<label lang="en">Block Google Analytics</label>
+			<value>0</value>
+			<description lang="de">Blockiert die Google Analytics Einbindung aus dem Google Services Plugin, falls installiert, vollständig. Nach Aktivieren dieser Option muss das Theme neu kompiliert werden.</description>
+			<description lang="en">Full blocks Google Analytics integration form the Google Services plugin, if installed. After activating this option you must recompile the theme.</description>
+		</element>
+	</elements>
+</config>
