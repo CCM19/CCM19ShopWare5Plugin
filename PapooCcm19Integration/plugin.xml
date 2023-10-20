@@ -4,13 +4,17 @@
 	<label lang="de">CCM19-Integration</label>
 	<label lang="en">CCM19 Integration</label>
 
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<copyright>(c) Papoo Software &amp; Media GmbH</copyright>
 	<license>proprietary</license>
 	<link>https://www.papoo-media.de</link>
 	<author>Papoo Software &amp; Media GmbH</author>
 	<compatibility minVersion="5.2.0"/>
 
+	<changelog version="1.2.1">
+		<changes lang="de"><![CDATA[Anpassung zur Erfüllung des Shopware Technologie-Partner-Vertrags.]]></changes>
+		<changes lang="en"><![CDATA[Modifications for fulfilment of Shopware Technology Partner Agreement.]]></changes>
+	</changelog>
 	<changelog version="1.2.0">
 		<changes lang="de"><![CDATA[Unterstützung für Plugins, die den Shopware Cookie Manager nutzen, verbessert.]]></changes>
 		<changes lang="en"><![CDATA[Improved support for plugins that use the Shopware Cookie Manager.]]></changes>
