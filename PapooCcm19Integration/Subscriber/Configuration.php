@@ -72,18 +72,23 @@ class Configuration implements SubscriberInterface
 
 	/**
 	 * @param \Shopware\Models\Shop\Shop $shop
-	 * @return string|null
+	 * @return array{apiKey:string,domain:?string}|null
 	 */
-	private function getIntegrationApiKey($shop)
+	private function getIntegrationApiKeyAndDomain($shop): ?array
 	{
 		$config = $this->getPluginConfig($shop);
 		if ($config && isset($config['integrationCode'])) {
 			$code = $this->getPluginConfig($shop)['integrationCode'];
 			if ($code) {
-				$match = [];
-				preg_match('~[?&;]apiKey=([^&]*)~', $code, $match);
-				if ($match and $match[1]) {
-					return html_entity_decode($match[1], ENT_HTML401|ENT_QUOTES, 'UTF-8');
+				$keyMatch = [];
+				$domainMatch = [];
+				preg_match('~[?&;]apiKey=([^&\'"]*)~', $code, $keyMatch);
+				preg_match('~[?&;]domain=([^&\'"]*)~', $code, $domainMatch);
+				if ($keyMatch and $keyMatch[1]) {
+					return [
+						'apiKey' => html_entity_decode($keyMatch[1], ENT_HTML401|ENT_QUOTES, 'UTF-8'),
+						'domain' => (empty($domainMatch[1])) ? null : html_entity_decode($domainMatch[1], ENT_HTML401|ENT_QUOTES, 'UTF-8'),
+					];
 				}
 			}
 		}
@@ -135,11 +140,14 @@ class Configuration implements SubscriberInterface
 	 */
 	private function sendLicenseNotification()
 	{
-		$apiKeys = [];
+		$result = [];
 		$shops = $this->shopRepo->findByActive(true);
 		foreach ($shops as $shop) {
-			$apiKey = $this->getIntegrationApiKey($shop);
-			$apiKeys[$apiKey] = $apiKey;
+			$data = $this->getIntegrationApiKeyAndDomain($shop);
+
+			if ($data) {
+				$result[$data['apiKey'].':'.$data['domain']] = $data;
+			}
 		}
 
 		$now = new DateTime();
@@ -147,14 +155,14 @@ class Configuration implements SubscriberInterface
 			'reportDate' => $now->format(DateTimeInterface::ATOM),
 			'instanceId' => '',
 			'shopwareVersion' => $this->getShopwareVersion(),
-			'ccm19ApiKeys' => array_values($apiKeys),
+			'ccm19Data' => array_values($result),
 		];
 		$hash = $this->generateHash($data);
 
 		$client = $this->clientFactory->createClient();
 		$request = new Request(
 			'POST',
-				'https://licence.ccm19.de/shopware.php?action=register',
+				'https://licence.ccm19.de/shopware.php?action=report',
 				['Content-Type' => 'application/x-www-form-urlencoded', 'Authorization' => "Bearer $hash"],
 				http_build_query($data, '', '&', PHP_QUERY_RFC1738)
 		);
