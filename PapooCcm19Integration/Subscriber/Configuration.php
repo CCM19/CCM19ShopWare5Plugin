@@ -76,7 +76,7 @@ class Configuration implements SubscriberInterface
 	 * @param \Shopware\Models\Shop\Shop $shop
 	 * @return array
 	 */
-	private function getPluginConfig($shop): array {
+	private function getPluginConfig($shop) {
 		$data = $this->configReader->getByPluginName('PapooCcm19Integration', $shop);
 		return ($data) ? $data : [];
 	}
@@ -85,7 +85,7 @@ class Configuration implements SubscriberInterface
 	 * @param \Shopware\Models\Shop\Shop $shop
 	 * @return array{apiKey:string,domain:?string}|null
 	 */
-	private function getIntegrationApiKeyAndDomain($shop): ?array
+	private function getIntegrationApiKeyAndDomain($shop)
 	{
 		$config = $this->getPluginConfig($shop);
 		if ($config && isset($config['integrationCode'])) {
