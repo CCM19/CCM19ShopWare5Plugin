@@ -2,7 +2,7 @@
 /*
  * @copyright Papoo Software & Media GmbH
  * @author Christoph Grenz <info@papoo.de>
- * @date 2021-04-14
+ * @date 2023-10-24
  */
 
 namespace PapooCcm19Integration\Subscriber;
@@ -11,6 +11,8 @@ use Enlight\Event\SubscriberInterface;
 use Enlight_Event_EventArgs;
 use Shopware\Components\Plugin\CachedConfigReader;
 use Shopware\Components\Plugin\ConfigReader;
+use Shopware\Bundle\PluginInstallerBundle\Service\UniqueIdGenerator\UniqueIdGenerator;
+use Shopware\Bundle\PluginInstallerBundle\Service\UniqueIdGeneratorInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Shopware\Components\HttpClient\GuzzleFactory;
 use GuzzleHttp\ClientInterface;
@@ -32,6 +34,8 @@ class Configuration implements SubscriberInterface
 	private $shopRepo;
 	/** @var GuzzleFactory */
 	private $clientFactory;
+	/** @var string */
+	private $uniqueId = '';
 
 	private $kernel;
 
@@ -48,6 +52,13 @@ class Configuration implements SubscriberInterface
 		$this->configReader = $configReader;
 		$this->clientFactory = $clientFactory;
 		$this->kernel = $container->get('kernel');
+		try {
+			/** @var UniqueIdGeneratorInterface $uniqueIdGenerator */
+			$uniqueIdGenerator = $container->get(UniqueIdGenerator::class);
+			$this->uniqueId = $uniqueIdGenerator->getUniqueId();
+		} catch (\Exception $ignore) {
+			// ignore
+		}
 	}
 
 	/**
@@ -153,7 +164,7 @@ class Configuration implements SubscriberInterface
 		$now = new DateTime();
 		$data = [
 			'reportDate' => $now->format(DateTimeInterface::ATOM),
-			'instanceId' => '',
+			'instanceId' => $this->uniqueId,
 			'shopwareVersion' => $this->getShopwareVersion(),
 			'ccm19Data' => array_values($result),
 		];
