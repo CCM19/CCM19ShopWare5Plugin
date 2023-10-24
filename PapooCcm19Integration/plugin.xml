@@ -9,7 +9,7 @@
 	<license>proprietary</license>
 	<link>https://www.papoo-media.de</link>
 	<author>Papoo Software &amp; Media GmbH</author>
-	<compatibility minVersion="5.2.0"/>
+	<compatibility minVersion="5.2.16"/>
 
 	<changelog version="1.2.1">
 		<changes lang="de"><![CDATA[Anpassung zur Erfüllung des Shopware Technologie-Partner-Vertrags.]]></changes>
