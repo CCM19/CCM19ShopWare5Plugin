@@ -163,7 +163,7 @@ class Configuration implements SubscriberInterface
 
 		$now = new DateTime();
 		$data = [
-			'reportDate' => $now->format(DateTimeInterface::ATOM),
+			'reportDate' => $now->format(defined('DateTimeInterface::ATOM') ? DateTimeInterface::ATOM : DATE_ATOM),
 			'instanceId' => $this->uniqueId,
 			'shopwareVersion' => $this->getShopwareVersion(),
 			'ccm19Data' => array_values($result),
