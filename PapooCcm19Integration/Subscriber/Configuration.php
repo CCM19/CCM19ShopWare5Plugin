@@ -17,7 +17,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Shopware\Components\HttpClient\GuzzleFactory;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Request;
 use DateTime;
 use DateTimeInterface;
 
@@ -171,13 +170,10 @@ class Configuration implements SubscriberInterface
 		$hash = $this->generateHash($data);
 
 		$client = $this->clientFactory->createClient();
-		$request = new Request(
-			'POST',
-				'https://licence.ccm19.de/shopware.php?action=report',
-				['Content-Type' => 'application/x-www-form-urlencoded', 'Authorization' => "Bearer $hash"],
-				http_build_query($data, '', '&', PHP_QUERY_RFC1738)
-		);
-		$client->send($request);
+		$response = $client->post('https://licence.ccm19.de/shopware.php?action=report', [
+			'body' => http_build_query($data, '', '&', PHP_QUERY_RFC1738),
+			'headers' => ['Content-Type' => 'application/x-www-form-urlencoded', 'Authorization' => "Bearer $hash"],
+		]);
 	}
 
 	/**
